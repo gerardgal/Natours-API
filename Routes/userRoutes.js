@@ -6,6 +6,7 @@ const router = express.Router();
 
 // This one doesn't follow the REST philosophy but its okay.
 router.post('/signup', authController.signup);
+router.post('/login', authController.login);
 
 router
 	.route('/')
