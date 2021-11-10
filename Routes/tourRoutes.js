@@ -1,5 +1,6 @@
 const express = require('express');
-const tourController = require('./../Controllers/tourController.js');
+const tourController = require('./../Controllers/tourController');
+const authController = require('./../Controllers/authController');
 
 const router = express.Router();
 //!! It is a convention to call it just router.
@@ -7,26 +8,26 @@ const router = express.Router();
 // router.param('id', tourController.checkID);
 
 router
-.route('/top-5-cheap')
-.get(tourController.aliasTopTours, tourController.getAllTours);
+	.route('/top-5-cheap')
+	.get(tourController.aliasTopTours, tourController.getAllTours);
 
 router
-.route('/tour-stats')
-.get(tourController.getTourStats);
+	.route('/tour-stats')
+	.get(tourController.getTourStats);
 
 router
-.route('/monthly-plan/:year')
-.get(tourController.getMonthlyPlan);
+	.route('/monthly-plan/:year')
+	.get(tourController.getMonthlyPlan);
 
 router
-.route('/')
-.get(tourController.getAllTours)
-.post(tourController.createTour);
+	.route('/')
+	.get(authController.protect, tourController.getAllTours)
+	.post(tourController.createTour);
 
 router
-.route('/:id')
-.get(tourController.getTour)
-.patch(tourController.updateTour)
-.delete(tourController.deleteTour);
+	.route('/:id')
+	.get(tourController.getTour)
+	.patch(tourController.updateTour)
+	.delete(tourController.deleteTour);
 
 module.exports = router;
