@@ -10,12 +10,9 @@ process.on('uncaughtException', err => {
 const app = require('./app');
 const DB = config.DATABASE;
 
-mongoose.connect(DB, {
-	useNewUrlParser: true,
-	useCreateIndex: true,
-	useFindAndModify: false,
-	useUnifiedTopology: true
-}).then(() => console.log('DB connection successful!')).catch(err=>console.log('ERROR'));
+mongoose.connect(DB)
+	.then(() => console.log('DB connection successful!'))
+	.catch(err=>console.log('ERROR' + err.stack));
 
 const port = config.PORT || 8000;
 const server = app.listen(port, () =>{
