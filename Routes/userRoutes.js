@@ -1,12 +1,15 @@
 const express = require('express');
-const userController = require('./../Controllers/userController.js');
-const authController = require('./../Controllers/authController.js');
+const userController = require('./../controllers/userController.js');
+const authController = require('./../controllers/authController.js');
 
 const router = express.Router();
 
 // This one doesn't follow the REST philosophy but its okay.
 router.post('/signup', authController.signup);
 router.post('/login', authController.login);
+
+router.post('/forgotPassword', authController.forgotPassword);
+router.post('/resetPassword', authController.resetPassword);
 
 router
 	.route('/')
