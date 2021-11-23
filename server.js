@@ -13,7 +13,8 @@ const DB = config.DATABASE;
 mongoose.connect(DB, {
 	useNewUrlParser: true,
 	useCreateIndex: true,
-	useFindAndModify: false
+	useFindAndModify: false,
+	useUnifiedTopology: true
 }).then(() => console.log('DB connection successful!')).catch(err=>console.log('ERROR'));
 
 const port = config.PORT || 8000;

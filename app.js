@@ -3,11 +3,11 @@ const morgan = require('morgan');
 const config = require('./config');
 
 const AppError = require('./utils/appError');
-const globalErrorHandler = require('./Controllers/errorController');
-const tourRouter = require('./Routes/tourRoutes');
-const userRouter = require('./Routes/userRoutes');
+const globalErrorHandler = require('./controllers/errorController');
+const tourRouter = require('./routes/tourRoutes');
+const userRouter = require('./routes/userRoutes');
 
-const app = express(); //Adding methods to app variable.
+const app = express();
 
 // 1) Middlewares
 console.log(config.ENV);
@@ -16,8 +16,8 @@ if(config.ENV === 'development') {
 }
 
 // This is the middleware. Is in the middle of the req and res.
-app.use(express.json());
-app.use(express.static(`${__dirname}/public`));
+app.use(express.json({ limit: '10kb' }));
+app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
 //Useful method when testing middleware.
 app.use((req, res, next) => {
