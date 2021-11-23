@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
 		type: String,
 		required: [true, 'Please provide a password'],
 		minlength: 8,
-		select: false,
+		select: false
 	},
 	passwordConfirm: {
 		type: String,
@@ -35,12 +35,17 @@ const userSchema = new mongoose.Schema({
 			validator: function (el) {
 				return el === this.password;
 			},
-			message: 'Incorrect password!'
+			message: 'Passwords are not the same!'
 		}
 	},
 	passwordChangedAt: Date,
 	passwordResetToken: String,
-	passwordResetExpires: Date
+	passwordResetExpires: Date,
+	active: {
+		type: Boolean,
+		default: true,
+		select: false
+	}
 });
 
 userSchema.pre('save', async function(next) {
