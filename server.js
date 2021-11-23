@@ -15,7 +15,7 @@ mongoose.connect(DB)
 	.catch(err=>console.log('ERROR' + err.stack));
 
 const port = config.PORT || 8000;
-const server = app.listen(port, () =>{
+const server = app.listen(port, () => {
 	console.log(`App running on port ${port}...`);
 });
 
