@@ -63,6 +63,12 @@ userSchema.pre('save', function(next) {
 	next();
 });
 
+userSchema.pre(/^find/, function(next) {
+	// This points to the current query
+	this.find({ active: { $ne: false } });
+	next();
+});
+
 // Instance methods
 userSchema.methods.correctPassword = async function(candidatePassword, userPassword) {
 	return await bcrypt.compare(candidatePassword, userPassword);
