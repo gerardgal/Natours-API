@@ -3,7 +3,6 @@ const tourController = require('./../controllers/tourController');
 const authController = require('./../controllers/authController');
 
 const router = express.Router();
-//!! It is a convention to call it just router.
 
 // router.param('id', tourController.checkID);
 
