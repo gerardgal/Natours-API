@@ -1,7 +1,6 @@
 const Review = require('./../models/reviewModel');
-const APIFeatures = require('./../utils/apiFeatures');
 const catchAsync = require('./../utils/catchAsync');
-const AppError = require('./../utils/appError');
+const service = require('./handlerService');
 
 exports.createReview = catchAsync(async (req, res, next) => {
 	// Allowing nested routes
@@ -32,3 +31,5 @@ exports.getAllReviews = catchAsync(async (req, res, next) => {
 		}
 	});
 });
+
+exports.deleteReview = service.deleteOne(Review);
