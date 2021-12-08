@@ -4,7 +4,7 @@ const authController = require('./../controllers/authController.js');
 
 const router = express.Router();
 
-// This one doesn't follow the REST philosophy but its okay.
+router.get('/me', authController.protect, userController.getMe, userController.getUser);
 router.post('/signup', authController.signup);
 router.post('/login', authController.login);
 
