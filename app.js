@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const config = require('./config');
@@ -14,8 +15,13 @@ const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 
 const app = express();
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
 
 // 1) Global Middlewares
+
+// Serving static files
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Security HTTP headers
 app.use(helmet());
@@ -36,6 +42,7 @@ app.use('/api', limiter);
 
 // Body parser
 app.use(express.json({ limit: '10kb' }));
+app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
 // Data sanitization
 app.use(mongoSanitize());
@@ -52,10 +59,6 @@ app.use(hpp({
 		'price']
 }));
 
-// Serving static files
-app.use(express.static(`${__dirname}/public`));
-app.use(express.urlencoded({ extended: true, limit: '10kb' }));
-
 // Test middleware
 app.use((req, res, next) => {
 	req.requestTime = new Date().toISOString();
@@ -63,6 +66,13 @@ app.use((req, res, next) => {
 });
 
 /////////////////// ROUTING ////////////////////
+
+app.get('/', (req, res) => {
+	res.status(200).render('base', {
+		tour: 'The Forest Hiker',
+		user: 'Gerard'
+	});
+});
 
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
