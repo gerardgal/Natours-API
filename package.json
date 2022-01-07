@@ -1,7 +1,7 @@
 {
   "name": "natour",
   "version": "1.0.0",
-  "description": "learning node, express and mongodb",
+  "description": "A RESTful API and web app built at the server side using: NodeJS, Express, MongoDB and Pug templates.",
   "main": "app.js",
   "scripts": {
     "start": "SET NODE_ENV=development && nodemon server.js",
@@ -10,7 +10,7 @@
     "delete": "node dev-data/data/import-dev-data.js -d",
     "debug": "ndb server.js"
   },
-  "author": "Jonas/Gerard",
+  "author": "Gerardo Galicia",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
