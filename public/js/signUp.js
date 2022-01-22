@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-const signup = async (name, email, password, passwordConfirm) => {
+const signup = async (name, email, photo, password, passwordConfirm) => {
   try {
     const res = await axios({
       method: 'POST',
@@ -8,6 +8,7 @@ const signup = async (name, email, password, passwordConfirm) => {
       data: {
         name,
         email,
+        photo,
         password,
         passwordConfirm
       }
@@ -29,7 +30,8 @@ document.querySelector('.form').addEventListener('submit', event => {
 
   const name = document.getElementById('name').value;
   const email = document.getElementById('email').value;
+  const photo = document.getElementById('photo').value;
   const password = document.getElementById('password').value;
   const passwordConfirm = document.getElementById('passwordConfirm').value;
-  signup(name, email, password, passwordConfirm);
+  signup(name, email, photo, password, passwordConfirm);
 });
