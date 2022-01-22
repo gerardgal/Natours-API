@@ -25,5 +25,10 @@
             "error",
             "always"
         ]
+    },
+    "parser": "babel-eslint",
+    "parser-options": {
+      "sourceType": "module",
+      "allowImportExportEverywhere": true
     }
 }
