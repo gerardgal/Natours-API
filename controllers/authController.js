@@ -13,17 +13,16 @@ const signToken = id => {
 	});
 };
 
-const createSendToken = (user, statusCode, res) => {
+const createSendToken = (user, statusCode, req, res) => {
 	const token = signToken(user._id);
 
-	const cookieOptions = {
+	res.cookie('jwt', token, {
 		expires: new Date(Date.now() + config.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000),
 		httpOnly: true
-	};
+	});
 
 	if(config.ENV === 'production') cookieOptions.secure = true;
 
-	res.cookie('jwt', token, cookieOptions);
 	user.password = undefined;
 
 	res.status(statusCode).json({
@@ -36,11 +35,18 @@ const createSendToken = (user, statusCode, res) => {
 };
 
 exports.signup = catchAsync (async (req, res, next) => {
-	const newUser = await User.create(req.body);
-	createSendToken(newUser, 201, res);
+	const newUser = await User.create({
+		name: req.body.name,
+		email: req.body.email,
+		photo: req.body.photo,
+		password: req.body.password,
+		passwordConfirm: req.body.passwordConfirm
+	});
+
+	createSendToken(newUser, 201, req, res);
 });
 
-exports.login = catchAsync( async (req, res, next) => {
+exports.login = catchAsync (async (req, res, next) => {
 	const { email, password } = req.body;
 
 	// Check if email/password exists
@@ -56,11 +62,11 @@ exports.login = catchAsync( async (req, res, next) => {
 	}
 
 	// If everything is okay, send token to client
-	createSendToken(user, 200, res);
+	createSendToken(user, 200, req, res);
 });
 
 
-exports.protect = catchAsync( async (req, res, next) => {
+exports.protect = catchAsync (async (req, res, next) => {
 	let token;
 
 	// First, Get the token and check if its there/exists
@@ -92,29 +98,31 @@ exports.protect = catchAsync( async (req, res, next) => {
 	next();
 });
 
-exports.isLoggedIn = catchAsync( async (req, res, next) => {
-
+exports.isLoggedIn = async (req, res, next) => {
 	if (req.cookies.jwt) {
+		try {
+			// Validate the token
+			const decoded = await promisify(jwt.verify)(req.cookies.jwt, config.JWT);
 
-		// Validate the token
-		const decoded = await promisify(jwt.verify)(req.cookies.jwt, config.JWT);
+			// Check if the user still exists
+			const currentUser = await User.findById(decoded.id);
+			if (!currentUser) {
+				return next();
+			}
 
-		// Check if the user still exists
-		const currentUser = await User.findById(decoded.id);
-		if (!currentUser) {
+			// Check if user changed password after the token was issued
+			if (currentUser.changedPasswordAfter(decoded.iat)) {
+				return next();
+			}
+
+			res.locals.user = currentUser;
+			return next();
+		} catch (err) {
 			return next();
 		}
-
-		// Check if user changed password after the token was issued
-		if (currentUser.changedPasswordAfter(decoded.iat)) {
-			return next();
-		}
-
-		res.locals.user = currentUser;
-		return next();
 	}
 	next();
-});
+};
 
 exports.restrictTo = (...roles) => {
 	return (req, res, next) => {
@@ -183,7 +191,7 @@ exports.resetPassword = catchAsync (async (req, res, next) => {
 
 
 	// 4) Log the user in, send JWT
-	createSendToken(user, 200, res);
+	createSendToken(user, 200, req, res);
 });
 
 exports.updatePassword = catchAsync (async (req, res, next) => {
@@ -201,5 +209,5 @@ exports.updatePassword = catchAsync (async (req, res, next) => {
 	await user.save();
 
 	// 4) Log user in. Send JWT.
-	createSendToken(user, 200, res);
+	createSendToken(user, 200, req, res);
 });
