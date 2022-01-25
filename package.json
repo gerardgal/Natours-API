@@ -1,16 +1,16 @@
 {
   "name": "natour",
   "version": "1.0.0",
-  "description": "A RESTful API and web app built at the server side using: NodeJS, Express, MongoDB and Pug templates.",
-  "main": "public/js/bundle.js",
+  "description": "A RESTful API and a server side web app built with: NodeJS, Express, MongoDB and Pug templates.",
+  "main": "app.js",
   "scripts": {
     "start": "SET NODE_ENV=development && nodemon server.js",
     "start:prod": "SET NODE_ENV=production && nodemon server.js",
     "import": "node dev-data/data/import-dev-data.js -i",
     "delete": "node dev-data/data/import-dev-data.js -d",
     "debug": "ndb server.js",
-    "watch:js": "parcel watch ./public/js/index.js --dist-dir ./public/js",
-    "build:js": "parcel build ./public/js/index.js --dist-dir ./public/js"
+    "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js",
+    "build:js": "parcel build ./public/js/index.js --out-dir ./public/js --out-file bundle.js"
   },
   "author": "Gerardo Galicia",
   "license": "ISC",
@@ -30,10 +30,15 @@
     "morgan": "^1.10.0",
     "nodemailer": "^6.7.1",
     "nodemon": "^2.0.15",
-    "parcel": "^2.2.1",
     "pug": "^3.0.2",
     "slugify": "^1.5.3",
     "validator": "^13.6.0",
     "xss-clean": "^0.1.1"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5"
+  },
+  "engines": {
+    "node": "^10"
   }
 }
