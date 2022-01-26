@@ -1,6 +1,8 @@
 /* eslint-disable */
+import axios from 'axios';
+import { showAlert } from './alerts';
 
-const signup = async (name, email, photo, password, passwordConfirm) => {
+export const signup = async (name, email, photo, password, passwordConfirm) => {
   try {
     const res = await axios({
       method: 'POST',
@@ -15,23 +17,12 @@ const signup = async (name, email, photo, password, passwordConfirm) => {
     });
 
     if(res.data.status === 'success') {
-      alert('Registered successfully!');
+      showAlert('success', 'Registered successfully!');
       window.setTimeout(() => {
         location.assign('/');
       }, 1500);
     }
   } catch (err) {
-    alert(err.response.message);
+    showAlert('error', err.response.message);
   }
 };
-
-document.querySelector('.form').addEventListener('submit', event => {
-  event.preventDefault();
-
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const photo = document.getElementById('photo').value;
-  const password = document.getElementById('password').value;
-  const passwordConfirm = document.getElementById('passwordConfirm').value;
-  signup(name, email, photo, password, passwordConfirm);
-});
