@@ -42,7 +42,7 @@ if (logOutBtn) logOutBtn.addEventListener('click', logout);
 
 if (userDataForm) {
   userDataForm.addEventListener('submit', event => {
-    e.preventDefault();
+    event.preventDefault();
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     updateSettings({ name, email }, 'data');
@@ -50,8 +50,8 @@ if (userDataForm) {
 };
 
 if (userPasswordForm) {
-  userPasswordForm.addEventListener('submit', async event => {
-    e.preventDefault();
+  userPasswordForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
     document.querySelector('.btn--save-password').textContent = 'Updating...';
 
     const passwordCurrent = document.getElementById('password-current').value;
