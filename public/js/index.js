@@ -20,12 +20,13 @@ if (mapBox) {
 if (signUpForm) {
   signUpForm.addEventListener('submit', event => {
     event.preventDefault();
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const photo = document.getElementById('photo').value;
-    const password = document.getElementById('password').value;
-    const passwordConfirm = document.getElementById('passwordConfirm').value;
-    signup(name, email, photo, password, passwordConfirm);
+    const form = new FormData();
+    form.append('name', document.getElementById('name').value);
+    form.append('email', document.getElementById('email').value);
+    form.append('photo', document.getElementById('photo').files[0]);
+    form.append('password', document.getElementById('password').value);
+    form.append('passwordConfirm', document.getElementById('passwordConfirm').value);
+    signup(form);
   });
 }
 
@@ -43,9 +44,11 @@ if (logOutBtn) logOutBtn.addEventListener('click', logout);
 if (userDataForm) {
   userDataForm.addEventListener('submit', event => {
     event.preventDefault();
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    updateSettings({ name, email }, 'data');
+    const form = new FormData();
+    form.append('name', document.getElementById('name').value);
+    form.append('email', document.getElementById('email').value);
+    form.append('photo', document.getElementById('photo').files[0]);
+    updateSettings(form, 'data');
   });
 };
 
