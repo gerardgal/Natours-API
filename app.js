@@ -8,6 +8,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -21,8 +22,6 @@ const app = express();
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
-// 1) Global Middlewares
-
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -30,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(helmet());
 
 // Development logging
+// !!!!!!!!!!! Remove
 console.log('Current enviroment:', config.ENV);
 if(config.ENV === 'development') {
 	app.use(morgan('dev'));
@@ -63,14 +63,16 @@ app.use(hpp({
 		'price']
 }));
 
+// Compression
+app.use(compression());
+
 // Test middleware
 app.use((req, res, next) => {
 	req.requestTime = new Date().toISOString();
 	next();
 });
 
-/////////////////// ROUTING ////////////////////
-
+// Routing
 app.use('/', viewRouter);
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
