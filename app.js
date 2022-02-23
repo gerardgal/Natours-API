@@ -29,11 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(helmet());
 
 // Development logging
-// !!!!!!!!!!! Remove
-console.log('Current enviroment:', config.ENV);
-if(config.ENV === 'development') {
-	app.use(morgan('dev'));
-}
+if(config.ENV === 'development') { app.use(morgan('dev')); }
 
 // Limit requests from same API
 const limiter = rateLimit({
