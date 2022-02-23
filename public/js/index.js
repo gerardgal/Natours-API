@@ -12,6 +12,7 @@ const signUpForm = document.querySelector('.form--signup');
 const logOutBtn = document.querySelector('.nav__el--logout');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
+const signBtn = document.getElementById('sign-up');
 const bookBtn = document.getElementById('book-tour');
 
 if (mapBox) {
@@ -22,13 +23,11 @@ if (mapBox) {
 if (signUpForm) {
   signUpForm.addEventListener('submit', event => {
     event.preventDefault();
-    const form = new FormData();
-    form.append('name', document.getElementById('name').value);
-    form.append('email', document.getElementById('email').value);
-    form.append('photo', document.getElementById('photo').files[0]);
-    form.append('password', document.getElementById('password').value);
-    form.append('passwordConfirm', document.getElementById('passwordConfirm').value);
-    signup(form);
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const passwordConfirm = document.getElementById('passwordConfirm').value;
+    signup(name, email, password, passwordConfirm);
   });
 }
 
@@ -68,6 +67,12 @@ if (userPasswordForm) {
     document.getElementById('password-current').value = '';
     document.getElementById('password').value = '';
     document.getElementById('password-confirm').value = '';
+  });
+};
+
+if (signBtn) {
+  signBtn.addEventListener('click', event => {
+    event.target.textContent = 'Processing...';
   });
 };
 

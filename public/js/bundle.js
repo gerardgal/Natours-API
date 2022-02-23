@@ -8860,7 +8860,7 @@ var login = /*#__PURE__*/function () {
             _context.next = 3;
             return (0, _axios.default)({
               method: 'POST',
-              url: 'http://127.0.0.1:3000/api/v1/users/login',
+              url: '/api/v1/users/login',
               data: {
                 email: email,
                 password: password
@@ -8911,7 +8911,7 @@ var logout = /*#__PURE__*/function () {
             _context2.next = 3;
             return (0, _axios.default)({
               method: 'GET',
-              url: 'http://127.0.0.1:3000/api/v1/users/logout'
+              url: '/api/v1/users/logout'
             });
 
           case 3:
@@ -8958,7 +8958,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 var signup = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(data) {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(name, email, password, passwordConfirm) {
     var res;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -8968,8 +8968,13 @@ var signup = /*#__PURE__*/function () {
             _context.next = 3;
             return (0, _axios.default)({
               method: 'POST',
-              url: 'http://127.0.0.1:3000/api/v1/users/signup',
-              data: data
+              url: '/api/v1/users/signup',
+              data: {
+                name: name,
+                email: email,
+                password: password,
+                passwordConfirm: passwordConfirm
+              }
             });
 
           case 3:
@@ -8988,7 +8993,7 @@ var signup = /*#__PURE__*/function () {
           case 7:
             _context.prev = 7;
             _context.t0 = _context["catch"](0);
-            (0, _alerts.showAlert)('error', _context.t0.response.message);
+            (0, _alerts.showAlert)('error', _context.t0.response.data.message);
 
           case 10:
           case "end":
@@ -8998,7 +9003,7 @@ var signup = /*#__PURE__*/function () {
     }, _callee, null, [[0, 7]]);
   }));
 
-  return function signup(_x) {
+  return function signup(_x, _x2, _x3, _x4) {
     return _ref.apply(this, arguments);
   };
 }();
@@ -9030,7 +9035,7 @@ var updateSettings = /*#__PURE__*/function () {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
-            url = type === 'password' ? 'http://127.0.0.1:3000/api/v1/users/updateMyPassword' : 'http://127.0.0.1:3000/api/v1/users/updateMe';
+            url = type === 'password' ? '/api/v1/users/updateMyPassword' : '/api/v1/users/updateMe';
             _context.next = 4;
             return (0, _axios.default)({
               method: 'PATCH',
@@ -9096,7 +9101,7 @@ var bookTour = /*#__PURE__*/function () {
           case 0:
             _context.prev = 0;
             _context.next = 3;
-            return (0, _axios.default)("http://127.0.0.1:3000/api/v1/bookings/checkout-session/".concat(tourId));
+            return (0, _axios.default)("/api/v1/bookings/checkout-session/".concat(tourId));
 
           case 3:
             session = _context.sent;
@@ -9416,6 +9421,7 @@ var signUpForm = document.querySelector('.form--signup');
 var logOutBtn = document.querySelector('.nav__el--logout');
 var userDataForm = document.querySelector('.form-user-data');
 var userPasswordForm = document.querySelector('.form-user-password');
+var signBtn = document.getElementById('sign-up');
 var bookBtn = document.getElementById('book-tour');
 
 if (mapBox) {
@@ -9426,13 +9432,11 @@ if (mapBox) {
 if (signUpForm) {
   signUpForm.addEventListener('submit', function (event) {
     event.preventDefault();
-    var form = new FormData();
-    form.append('name', document.getElementById('name').value);
-    form.append('email', document.getElementById('email').value);
-    form.append('photo', document.getElementById('photo').files[0]);
-    form.append('password', document.getElementById('password').value);
-    form.append('passwordConfirm', document.getElementById('passwordConfirm').value);
-    (0, _signUp.signup)(form);
+    var name = document.getElementById('name').value;
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+    var passwordConfirm = document.getElementById('passwordConfirm').value;
+    (0, _signUp.signup)(name, email, password, passwordConfirm);
   });
 }
 
@@ -9502,6 +9506,14 @@ if (userPasswordForm) {
 
 ;
 
+if (signBtn) {
+  signBtn.addEventListener('click', function (event) {
+    event.target.textContent = 'Processing...';
+  });
+}
+
+;
+
 if (bookBtn) {
   bookBtn.addEventListener('click', function (event) {
     event.target.textContent = 'Processing...';
@@ -9539,7 +9551,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62340" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58105" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
