@@ -38,11 +38,11 @@ app.use(
   helmet({
     contentSecurityPolicy: {
       directives: {
-        defaultSrc: ['self', 'data:', 'blob:', 'https:', 'ws:'],
-        baseUri: ['self'],
-        fontSrc: ['self', 'https:', 'data:'],
+        defaultSrc: ["'self'", 'data:', 'blob:', 'https:', 'ws:'],
+        baseUri: ["'self'"],
+        fontSrc: ["'self'", 'https:', 'data:'],
         scriptSrc: [
-          'self',
+          "'self'",
           'https:',
           'http:',
           'blob:',
@@ -51,11 +51,11 @@ app.use(
           'https://m.stripe.network',
           'https://*.cloudflare.com',
         ],
-        frameSrc: ['self', 'https://js.stripe.com'],
-        objectSrc: ['none'],
-        styleSrc: ['self', 'https:', 'unsafe-inline'],
+        frameSrc: ["'self'", 'https://js.stripe.com'],
+        objectSrc: ["'none'"],
+        styleSrc: ["'self'", 'https:', "'unsafe-inline'"],
         workerSrc: [
-          'self',
+          "'self'",
           'data:',
           'blob:',
           'https://*.tiles.mapbox.com',
@@ -63,12 +63,12 @@ app.use(
           'https://events.mapbox.com',
           'https://m.stripe.network',
         ],
-        childSrc: ['self', 'blob:'],
-        imgSrc: ['self', 'data:', 'blob:'],
-        formAction: ['self'],
+        childSrc: ["'self'", 'blob:'],
+        imgSrc: ["'self'", 'data:', 'blob:'],
+        formAction: ["'self'"],
         connectSrc: [
           "'self'",
-          'unsafe-inline',
+          "'unsafe-inline'",
           'data:',
           'blob:',
           'https://*.stripe.com',
