@@ -34,7 +34,25 @@ app.options('*', cors());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Security HTTP headers
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'", 'http://127.0.0.1:3000/*'],
+        baseUri: ["'self'"],
+        fontSrc: ["'self'", 'https:', 'data:'],
+        scriptSrc: [
+          "'self'",
+          'https://*.stripe.com'
+        ],
+        frameSrc: ["'self'", 'https://*.stripe.com'],
+        objectSrc: ["'none'"],
+        styleSrc: ["'self'", 'https:', "'unsafe-inline'"],
+        upgradeInsecureRequests: [],
+      },
+    },
+  })
+);
 
 // Development logging
 if(config.ENV === 'development') { app.use(morgan('dev')); }
