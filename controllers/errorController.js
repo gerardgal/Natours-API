@@ -53,26 +53,21 @@ const sendErrorProd = (err, req, res) => {
 				message: err.message,
 			});
 		}
-			// 1) Log error
 			console.error('ERROR!', err);
 
-			// 2) Send generic message
 			return res.status(500).json({
 				status: 'error',
 				message: 'Something went very wrong!'
 			});
 	}
-		// Operational, trusted error: send a message to client
 		if (err.isOperational) {
 			return res.status(err.statusCode).render('error', {
 				title: 'Something went wrong!',
 				msg: err.message
 			});
 		}
-			// 1) Log error
 			console.error('ERROR!', err);
 
-			// 2) Send generic message
 			return res.status(err.statusCode).render('error', {
 				title: 'Something went wrong!',
 				msg: 'Please try again later.'

@@ -145,7 +145,7 @@ tourSchema.pre(/^find/, function(next) {
 	next();
 });
 
-/*
+/* ---- For Testing purposes ----
 tourSchema.post(/^find/, function(docs, next) {
 	console.log(`Query took ${Date.now() - this.start} milliseconds!`);
 	next();
@@ -161,6 +161,7 @@ tourSchema.pre('aggregate', function(next) {
 	next();
 });
 */
+
 const Tour = mongoose.model('Tour', tourSchema);
 
 module.exports = Tour;
