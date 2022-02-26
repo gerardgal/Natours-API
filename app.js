@@ -51,6 +51,11 @@ app.use(
 					'https://*.stripe.com',
 					'https://*.mapbox.com',
 				],
+				imgSrc: [
+					'self',
+					'https://*.stripe.com',
+        	'https://*.mapbox.com',
+				],
         objectSrc: ['none'],
         styleSrc: ['self', 'https:'],
       },
