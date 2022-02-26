@@ -38,17 +38,21 @@ app.use(
   helmet({
     contentSecurityPolicy: {
       directives: {
-        defaultSrc: ["'self'", 'http://127.0.0.1:3000/*'],
-        baseUri: ["'self'"],
-        fontSrc: ["'self'", 'https:', 'data:'],
+        defaultSrc: ['self', 'http://127.0.0.1:3000/*'],
+        baseUri: ['self'],
+        fontSrc: ['self', 'https://fonts.gstatic.com'],
         scriptSrc: [
-          "'self'",
-          'https://*.stripe.com'
+          'self',
+          'https://*.stripe.com',
+					'https://*.mapbox.com',
         ],
-        frameSrc: ["'self'", 'https://*.stripe.com'],
-        objectSrc: ["'none'"],
-        styleSrc: ["'self'", 'https:', "'unsafe-inline'"],
-        upgradeInsecureRequests: [],
+        frameSrc: [
+					'self',
+					'https://*.stripe.com',
+					'https://*.mapbox.com',
+				],
+        objectSrc: ['none'],
+        styleSrc: ['self', 'https:'],
       },
     },
   })
