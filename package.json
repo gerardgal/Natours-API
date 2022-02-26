@@ -4,7 +4,8 @@
   "description": "A RESTful API and a server side web app built with: NodeJS, Express, MongoDB and Pug templates.",
   "main": "app.js",
   "scripts": {
-    "start": "SET NODE_ENV=development && nodemon server.js",
+    "start": "node server.js",
+    "dev": "SET NODE_ENV=development && nodemon server.js",
     "start:prod": "SET NODE_ENV=production && nodemon server.js",
     "import": "node dev-data/data/import-dev-data.js -i",
     "delete": "node dev-data/data/import-dev-data.js -d",
