@@ -17,11 +17,10 @@ const createSendToken = (user, statusCode, req, res) => {
 	const token = signToken(user._id);
 
 	res.cookie('jwt', token, {
-		expires: new Date(Date.now() + config.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000),
-		httpOnly: true
+			expires: new Date(Date.now() + config.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000),
+			httpOnly: true,
+			secure: req.secure || req.headers['x-forwarded-proto'] === 'https'
 	});
-
-	if(config.ENV === 'production') { cookieOptions.secure = true; }
 
 	user.password = undefined;
 
