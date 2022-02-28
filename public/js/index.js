@@ -5,6 +5,7 @@ import { login, logout } from './login';
 import { signup } from './signUp';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
+import { showAlert } from './alerts';
 
 const mapBox = document.getElementById('map');
 const loginForm = document.querySelector('.form--login');
