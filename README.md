@@ -2,8 +2,16 @@
 This Web APP is currently deployed with Heroku. Check it out at: [Natours-gerard](https://natours-gerard.herokuapp.com/)
 
 <p align="center">
-    <img src="https://github.com/gerardgal/Natours-API/blob/master/public/img/screenshots/Home.jpg" alt="" width="900" height="500" />
+    <img src="https://github.com/gerardgal/Natours-API/blob/master/public/img/screenshots/Home.jpg" alt="Home Page" />
 </p>
+
+## Applied technologies
+
+- NodeJS / Express.
+- MongoDB / Mongoose ODM.
+- JWT / Bcrypt.
+- Stripe / Sendgrid.
+- Pug Templates / Parcel bundler.
 
 ## What can you do in this version?
 
@@ -17,8 +25,8 @@ This Web APP is currently deployed with Heroku. Check it out at: [Natours-gerard
 
 <p> This app uses Stripe payments webhook in order to process and checkout all bookings.
 The transaction is made within a test enviroment so no charges are applied. </p>
-In order to pay for a tour you just need to enter 4242 4242 4242 4242 as the card number, any expiration date in the future and any CVC.
+<p> In order to pay for a tour you just need to enter 4242 4242 4242 4242 as the card number, any expiration date in the future and any CVC. </p>
 
 ## API Documentation
 
-In order to test all the endpoints available , there's a Postman Collection that you can find in [here](https://someURL)
+In order to test all the endpoints available , click [here](https://documenter.getpostman.com/view/15232621/UVksLtaP) to access the API Postman documentation.
