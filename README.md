@@ -1,5 +1,5 @@
 # Description
-This Web APP is currently deployed with Heroku. Check it out at: [Natours-gerard](https://natours-gerard.herokuapp.com/)
+This website is currently deployed at Vercel. Check it out at: [Natours-gerard](https://natours-gerard.vercel.app/)
 
 <p align="center">
     <img src="https://github.com/gerardgal/Natours-API/blob/master/public/img/screenshots/Home.jpg" alt="Home Page" />
