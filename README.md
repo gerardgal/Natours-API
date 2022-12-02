@@ -2,7 +2,7 @@
 This website is currently being deployed. Will be available at: [Natours-gerard](URL)
 
 <p align="center">
-    <img src="https://github.com/gerardgal/Natours-API/blob/master/public/img/screenshots/Home.jpg" alt="Home Page" />
+    <img src="https://github.com/gerardgal/Natours-API/blob/main/public/img/screenshots/Home.jpg" alt="Home Page" />
 </p>
 
 ## Applied technologies
