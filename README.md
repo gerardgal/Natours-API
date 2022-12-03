@@ -1,8 +1,8 @@
 # Description
-This website is currently deployed at Vercel. Check it out at: [Natours-gerard](https://natours-gerard.vercel.app/)
+This website is currently being deployed. Will be available at: [Natours-gerard](URL)
 
 <p align="center">
-    <img src="https://github.com/gerardgal/Natours-API/blob/master/public/img/screenshots/Home.jpg" alt="Home Page" />
+    <img src="https://github.com/gerardgal/Natours-API/blob/main/public/img/screenshots/Home.jpg" alt="Home Page" />
 </p>
 
 ## Applied technologies
