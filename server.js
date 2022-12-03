@@ -8,16 +8,34 @@ process.on('uncaughtException', err => {
 });
 
 const app = require('./app');
+const port = config.PORT || 8000;
 const DB = config.DATABASE;
 
-mongoose.connect(DB)
-	.then(() => console.log('DB connection successful!'))
+const connectDB = async () => {
+	try {
+		const conn = await mongoose.connect(DB);
+		console.log(`MongoDB Connected: ${conn.connection.host}`);
+	} catch (error) {
+		console.log(error);
+		process.exit(1);
+	}
+}
+
+connectDB()
+	.then(() => {
+    	app.listen(port, () => {
+        	console.log(`App running on port ${port}...`);
+    	});
+	})
 	.catch(err=>console.log('ERROR' + err.stack));
 
-const port = config.PORT || 8000;
-const server = app.listen(port, () => {
-	console.log(`App running on port ${port}...`);
-});
+// mongoose.connect(DB)
+// 	.then(() => console.log('DB connection successful!'))
+// 	.catch(err=>console.log('ERROR' + err.stack));
+
+// const server = app.listen(port, () => {
+// 	console.log(`App running on port ${port}...`);
+// });
 
 process.on('unhandledRejection', err => {
 	console.log('There was an unhandled rejection. Shutting down...');
